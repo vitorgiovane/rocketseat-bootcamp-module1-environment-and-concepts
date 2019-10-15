@@ -1,0 +1,6 @@
+.env
+.history
+.vscode
+
+docker/postgres/data
+node_modules

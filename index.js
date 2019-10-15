@@ -2,20 +2,39 @@ const express = require("express")
 
 const server = express()
 
+server.use(express.json())
+
 const users = ["Vitor", "Diego", "Lucas"]
 
-// Query params
 server.get("/users", (request, response) => {
-  const name = request.query.name
-  response.json({ message: `Hello, ${name}` })
+  response.json(users)
 })
 
-// Route params
 server.get("/users/:index", (request, response) => {
   const { index } = request.params
   response.json({ name: users[index] })
 })
 
-// Request body
+server.post("/users", (request, response) => {
+  const { name } = request.body
+  users.push(name)
+  return response.json(users)
+})
+
+server.put("/users/:index", (request, response) => {
+  const { index } = request.params
+  const { name } = request.body
+
+  users[index] = name
+
+  return response.json(users[index])
+})
+
+server.delete("/users/:index", (request, response) => {
+  const { index } = request.params
+  users.splice(index, 1)
+
+  return response.send()
+})
 
 server.listen(3000)

@@ -2,6 +2,8 @@ const express = require("express")
 
 const server = express()
 
+const users = ["Vitor", "Diego", "Lucas"]
+
 // Query params
 server.get("/users", (request, response) => {
   const name = request.query.name
@@ -9,9 +11,9 @@ server.get("/users", (request, response) => {
 })
 
 // Route params
-server.get("/users/:id", (request, response) => {
-  const { id } = request.params
-  response.json({ message: `Searching the id: ${id}.` })
+server.get("/users/:index", (request, response) => {
+  const { index } = request.params
+  response.json({ name: users[index] })
 })
 
 // Request body
